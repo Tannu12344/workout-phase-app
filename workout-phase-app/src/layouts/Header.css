@@ -1,10 +1,11 @@
-/* Header.css */
 
 .app-bar {
-    background-color: #6c63ff; /* Custom primary color */
-    box-shadow: 0 2px 8px rgba(108, 99, 255, 0.08);
+ background: linear-gradient(90deg, #ff6f91 0%, #ffb6b9 100%);
+  box-shadow: 0 2px 8px rgba(255, 111, 145, 0.15);
+  width: 100%;
+  top: 0;
+  left: 0;
 }
-
 .toolbar {
     display: flex;
     justify-content: space-between;
@@ -18,6 +19,8 @@
     font-weight: 700;
     letter-spacing: 2px;
     color: #fff;
+    font-size: 1.7rem;
+    text-shadow: 0 2px 8px rgba(255, 182, 185, 0.2);
 }
 
 .header-buttons {
@@ -29,9 +32,31 @@
     color: #fff;
     font-weight: 500;
     text-transform: none;
-    transition: background 0.2s;
+    border-radius: 20px;
+    background: rgba(255, 182, 185, 0.15);
+    transition: background 0.2s, box-shadow 0.2s;
+    box-shadow: 0 1px 4px rgba(255, 111, 145, 0.08);
 }
 
 .header-buttons .MuiButton-root:hover {
-    background: rgba(255,255,255,0.08);
+    background: #ffb6b9;
+    color: #ff6f91;
+    box-shadow: 0 2px 8px rgba(255, 111, 145, 0.18);
+}
+
+@media (max-width: 600px) {
+    .toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px;
+    }
+    .header-title {
+        font-size: 1.2rem;
+        margin-bottom: 8px;
+    }
+    .header-buttons {
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
 }
