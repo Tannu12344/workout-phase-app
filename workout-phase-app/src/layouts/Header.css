@@ -1,0 +1,37 @@
+/* Header.css */
+
+.app-bar {
+    background-color: #6c63ff; /* Custom primary color */
+    box-shadow: 0 2px 8px rgba(108, 99, 255, 0.08);
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 64px;
+    padding: 0 24px;
+}
+
+.header-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #fff;
+}
+
+.header-buttons {
+    display: flex;
+    gap: 16px;
+}
+
+.header-buttons .MuiButton-root {
+    color: #fff;
+    font-weight: 500;
+    text-transform: none;
+    transition: background 0.2s;
+}
+
+.header-buttons .MuiButton-root:hover {
+    background: rgba(255,255,255,0.08);
+}
