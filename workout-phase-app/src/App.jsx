@@ -1,25 +1,39 @@
 // src/App.jsx
 import React from "react";
 import Header from "./layouts/Header";
-import { CssBaseline, Container, AppBar, Toolbar, Typography } from "@mui/material";
-import {link} from "react-router-dom";
+import Footer from "./layouts/Footer";
+import { CssBaseline, Container } from "@mui/material";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import Dashboard from "./components/PersonalDashboard";
+import About from "./pages/About";
+import CalenderView from "./components/CalenderView";
+import WorkoutSuggestions from "./components/WorkoutSuggestions";
+import CycleTracker from "./components/CycleTracker";
 import "./App.css";
-
 
 function App() {
   return (
-    <>
-      <CssBaseline /> {/* Reset default browser styles */}
-      
-      <Header/>
-      <AppBar position="static">
-        <Toolbar>
-          <Typography variant="h6">My App</Typography>
-        </Toolbar>
-      </AppBar>
-     </>
+    <Router>
+      <CssBaseline />
+      <div className="app-layout">
+        <Header />
+        <main className="app-content">
+          <Container>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/calendar" element={<CalenderView />} />
+              <Route path="/workout-suggestions" element={<WorkoutSuggestions />} />
+              <Route path="/cycle-tracker" element={<CycleTracker />} />
+            </Routes>
+          </Container>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
 export default App;
-
