@@ -1,0 +1,172 @@
+/* Center the calendar and increase its size */
+.react-calendar {
+  width: 80% !important;      /* Increase the width */
+  max-width: 500px;           /* Optional: max width */
+  margin: 20px auto;          /* Center horizontally */
+  font-size: 1.1rem;   
+  border: solid 1px #fff ;     
+}
+.react-calendar__navigation button {
+  color: #1976d2;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  padding: 6px 12px;
+  transition: background 0.2s ease;
+}
+
+.react-calendar__navigation button:hover {
+  background: #e3f2fd;
+}
+
+.react-calendar__navigation button:disabled {
+  background: none;
+  color: #bbb;
+}
+
+.cycle-tracker-card {
+  max-width: 500px;
+  margin: 20px auto;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  background: #fff;
+}
+
+/* Calendar tiles */
+.default-day {
+  background: #f8f8f8 !important;
+  color: #555 !important;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.default-day:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.today {
+  background: #ff6f91 !important; /* pink */
+  color: white !important;
+  border-radius: 50% !important;
+  font-weight: bold;
+  border: 2px solid #ff3366;
+}
+
+.menstrual-day {
+  background: #f28b82 !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.follicular-day {
+  background: #aecbfa !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.ovulation-day {
+  background: #fdd663 !important;
+  color: black !important;
+  border-radius: 50%;
+}
+
+.luteal-day {
+  background: #81c995 !important;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.selected-period-day {
+  background: #ff3366 !important;
+  color: white !important;
+  border-radius: 50%;
+  font-weight: bold;
+  border: 2px solid #ff6f91;
+}
+
+/* Month navigation buttons */
+.react-calendar__navigation button {
+  color: #ff6f91;
+  font-weight: bold;
+  font-size: 1.1rem;
+  background: transparent;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.react-calendar__navigation button:hover {
+  background: rgba(255, 111, 145, 0.15);
+}
+
+/* Weekday headers */
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  color: #ff6f91;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* Legend styling */
+.legend-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 16px;
+  justify-content: center;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.legend-item:hover {
+  background: rgba(255, 111, 145, 0.1);
+}
+
+/* Legend colors */
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.legend-color.menstrual {
+  background: #f28b82;
+}
+
+.legend-color.follicular {
+  background: #aecbfa;
+}
+
+.legend-color.ovulation {
+  background: #fdd663;
+}
+
+.legend-color.luteal {
+  background: #81c995;
+}
+
+.legend-color.selected-period-day {
+  background: #ff3366;
+}
+
+.legend-color.today {
+  background: #ff6f91;
+}
+
+/* Popover content */
+.MuiPopover-paper {
+  border-radius: 12px !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
