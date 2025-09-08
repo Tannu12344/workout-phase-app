@@ -46,6 +46,8 @@ function CycleTracker() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentPhase, setCurrentPhase] = useState(null);
 
+  const [pendingEditDate, setPendingEditDate] = useState(null); // 👈 for edit button
+
   const handleSubmit = () => {
     if (periodStart) {
       setShowCalendar(true);
@@ -63,6 +65,38 @@ function CycleTracker() {
     }
   };
 
+  // When clicking a date, show "Edit" option instead of instant update
+  const handleDateClick = (date) => {
+    const today = new Date();
+    const tomorrow = new Date();
+    tomorrow.setDate(today.getDate() + 1);
+
+    // Restrict: cannot select future dates after tomorrow
+    if (date > tomorrow) return;
+
+    setPendingEditDate(date); // 👈 show button after click
+  };
+
+  // Confirm edit
+  const confirmEditDate = () => {
+    if (!pendingEditDate) return;
+
+    setPeriodStart(pendingEditDate.toISOString().split("T")[0]);
+    setSelectedDate(pendingEditDate);
+
+    // Recalculate cycles based on new selection
+    let cycles = [];
+    for (let i = 0; i < 3; i++) {
+      const nextCycle = new Date(pendingEditDate);
+      nextCycle.setDate(pendingEditDate.getDate() + i * cycleLength);
+      cycles.push(nextCycle);
+    }
+    setPredictedCycles(cycles);
+
+    setPendingEditDate(null); // reset after confirmation
+  };
+
+  // Highlight phases on calendar
   const tileClassName = ({ date }) => {
     if (!showCalendar || predictedCycles.length === 0) return "default-day";
 
@@ -83,6 +117,7 @@ function CycleTracker() {
     return "default-day";
   };
 
+  // Legend info popover
   const handleLegendClick = (phase, event) => {
     setCurrentPhase(phase);
     setAnchorEl(event.currentTarget);
@@ -99,6 +134,7 @@ function CycleTracker() {
     <Card className="cycle-tracker-card">
       <CardContent>
         <Typography variant="h6" gutterBottom>
+          Cycle Tracker
         </Typography>
         {!showCalendar ? (
           <>
@@ -131,16 +167,45 @@ function CycleTracker() {
           </>
         ) : (
           <>
-            <Calendar tileClassName={tileClassName} prev2Label={null} next2Label={null} />
+            <Calendar
+              tileClassName={tileClassName}
+              prev2Label={null}
+              next2Label={null}
+              onClickDay={handleDateClick} // ✅ click date shows edit option
+            />
+
+            {/* 👇 Show Edit button after clicking a date */}
+            {pendingEditDate && (
+              <div style={{ marginTop: "12px", textAlign: "center" }}>
+                <Typography variant="body2" gutterBottom>
+                  You clicked {pendingEditDate.toDateString()}.  
+                  Do you want to set this as your new period date?
+                </Typography>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={confirmEditDate}
+                >
+                  Confirm Period Date
+                </Button>
+              </div>
+            )}
 
             <div className="legend-container">
               {["menstrual", "follicular", "ovulation", "luteal"].map((phase) => (
-                <div key={phase} className="legend-item" style={{ display: "flex", alignItems: "center", gap: "4px" }}>
+                <div
+                  key={phase}
+                  className="legend-item"
+                  style={{ display: "flex", alignItems: "center", gap: "4px" }}
+                >
                   <span className={`legend-color ${phase}`}></span>
                   <Typography variant="body2">
                     {phase.charAt(0).toUpperCase() + phase.slice(1)}
                   </Typography>
-                  <IconButton size="small" onClick={(e) => handleLegendClick(phase, e)}>
+                  <IconButton
+                    size="small"
+                    onClick={(e) => handleLegendClick(phase, e)}
+                  >
                     <InfoOutlinedIcon fontSize="small" />
                   </IconButton>
                 </div>
