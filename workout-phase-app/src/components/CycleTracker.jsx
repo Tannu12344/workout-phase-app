@@ -1,5 +1,5 @@
 // src/components/CycleTracker.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -45,8 +45,33 @@ function CycleTracker() {
   const [predictedCycles, setPredictedCycles] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentPhase, setCurrentPhase] = useState(null);
-
   const [pendingEditDate, setPendingEditDate] = useState(null); // 👈 for edit button
+
+  // 🔹 Load saved data from localStorage on mount
+  useEffect(() => {
+    const storedDate = localStorage.getItem("periodStart");
+    const storedCycleLength = localStorage.getItem("cycleLength");
+
+    if (storedDate) {
+      setPeriodStart(storedDate);
+      const startDate = new Date(storedDate);
+      setSelectedDate(startDate);
+      setShowCalendar(true);
+
+      let cycles = [];
+      const length = storedCycleLength ? Number(storedCycleLength) : 28;
+      for (let i = 0; i < 3; i++) {
+        const nextCycle = new Date(startDate);
+        nextCycle.setDate(startDate.getDate() + i * length);
+        cycles.push(nextCycle);
+      }
+      setPredictedCycles(cycles);
+    }
+
+    if (storedCycleLength) {
+      setCycleLength(Number(storedCycleLength));
+    }
+  }, []);
 
   const handleSubmit = () => {
     if (periodStart) {
@@ -62,6 +87,10 @@ function CycleTracker() {
         cycles.push(nextCycle);
       }
       setPredictedCycles(cycles);
+
+      // 🔹 Save to localStorage
+      localStorage.setItem("periodStart", periodStart);
+      localStorage.setItem("cycleLength", cycleLength.toString());
     }
   };
 
@@ -81,7 +110,8 @@ function CycleTracker() {
   const confirmEditDate = () => {
     if (!pendingEditDate) return;
 
-    setPeriodStart(pendingEditDate.toISOString().split("T")[0]);
+    const newDate = pendingEditDate.toISOString().split("T")[0];
+    setPeriodStart(newDate);
     setSelectedDate(pendingEditDate);
 
     // Recalculate cycles based on new selection
@@ -93,7 +123,16 @@ function CycleTracker() {
     }
     setPredictedCycles(cycles);
 
+    // 🔹 Update localStorage
+    localStorage.setItem("periodStart", newDate);
+    localStorage.setItem("cycleLength", cycleLength.toString());
+
     setPendingEditDate(null); // reset after confirmation
+  };
+
+  // Cancel edit
+  const cancelEditDate = () => {
+    setPendingEditDate(null);
   };
 
   // Highlight phases on calendar
@@ -174,20 +213,29 @@ function CycleTracker() {
               onClickDay={handleDateClick} // ✅ click date shows edit option
             />
 
-            {/* 👇 Show Edit button after clicking a date */}
+            {/* 👇 Show Edit option after clicking a date */}
             {pendingEditDate && (
               <div style={{ marginTop: "12px", textAlign: "center" }}>
                 <Typography variant="body2" gutterBottom>
                   You clicked {pendingEditDate.toDateString()}.  
                   Do you want to set this as your new period date?
                 </Typography>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  onClick={confirmEditDate}
-                >
-                  Confirm Period Date
-                </Button>
+                <div style={{ display: "flex", gap: "8px", justifyContent: "center" }}>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={confirmEditDate}
+                  >
+                    Confirm
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={cancelEditDate}
+                  >
+                    Cancel
+                  </Button>
+                </div>
               </div>
             )}
 
