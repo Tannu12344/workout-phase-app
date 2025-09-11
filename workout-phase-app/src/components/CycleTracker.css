@@ -1,10 +1,12 @@
 /* Center the calendar and increase its size */
 .react-calendar {
-  width: 80% !important;      /* Increase the width */
-  max-width: 500px;           /* Optional: max width */
-  margin: 20px auto;          /* Center horizontally */
-  font-size: 1.1rem;   
-  border: solid 1px #fff ;     
+  width: 80% !important;
+  max-width: 500px;
+  margin: 20px auto;
+  font-size: 1.1rem;
+  border: solid 1px #eee;
+  background: #fff; /* ✅ solid white background */
+  border-radius: 12px;
 }
 .react-calendar__navigation button {
   color: #1976d2;
@@ -30,9 +32,9 @@
   border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 16px;
-  background: #fff;
+  background: #fff; /* ✅ solid white card */
+  z-index: 2;
 }
-
 /* Calendar tiles */
 .default-day {
   background: #f8f8f8 !important;
