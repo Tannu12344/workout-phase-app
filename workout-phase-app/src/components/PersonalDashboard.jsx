@@ -1,27 +1,19 @@
+// src/components/PersonalDashboard.jsx
 import React from "react";
 import { Card, CardContent, Typography, Button } from "@mui/material";
-import { useNavigate } from "react-router-dom"; // ✅ for navigation
 import "./PersonalDashboard.css";
 
-// Mock data (can later be fetched from local storage / API)
-const nextPeriodDate = "Sept 25, 2025";
-const currentPhase = "Luteal";
-const daysRemaining = 10;
-const workoutsThisWeek = 3;
-const weeklyGoal = 5;
-const streak = 3;
-
-function PersonalDashboard() {
-  const navigate = useNavigate();
-
-  const handleOpenCalendar = () => {
-    navigate("/cycle-tracker"); // ✅ goes to CycleTracker route
-  };
-
+function PersonalDashboard({
+  nextPeriodDate,
+  currentPhase,
+  daysRemaining,
+  workoutsThisWeek,
+  weeklyGoal,
+  streak,
+}) {
   return (
     <Card className="dashboard-card">
       <CardContent>
-        {/* Title */}
         <Typography variant="h6" className="dashboard-title" gutterBottom>
           Personal Dashboard
         </Typography>
@@ -30,9 +22,12 @@ function PersonalDashboard() {
         <div className="dashboard-section">
           <h3>🌸 Cycle Summary</h3>
           <p>
-            Next Period: {nextPeriodDate} ({daysRemaining} days left)
+            Next Period:{" "}
+            {nextPeriodDate
+              ? `${nextPeriodDate} (${daysRemaining} days left)`
+              : "Not set yet"}
           </p>
-          <p>Current Phase: {currentPhase}</p>
+          <p>Current Phase: {currentPhase || "Unknown"}</p>
         </div>
 
         {/* Workout Overview */}
@@ -57,7 +52,7 @@ function PersonalDashboard() {
             <Button
               variant="outlined"
               color="success"
-              onClick={handleOpenCalendar}
+              onClick={() => (window.location.href = "/cycle-tracker")}
             >
               Open Calendar
             </Button>

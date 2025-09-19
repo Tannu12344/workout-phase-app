@@ -1,5 +1,5 @@
 // src/App.jsx
-import React from "react";
+import React, { useState } from "react";
 import Header from "./layouts/Header";
 import Footer from "./layouts/Footer";
 import { CssBaseline, Container } from "@mui/material";
@@ -12,6 +12,13 @@ import CycleTracker from "./components/CycleTracker";
 import "./App.css";
 
 function App() {
+  const [nextPeriodDate, setNextPeriodDate] = useState(null);
+  const [currentPhase, setCurrentPhase] = useState(null);
+  const [daysRemaining, setDaysRemaining] = useState(null);
+  const [workoutsThisWeek, setWorkoutsThisWeek] = useState(0);
+  const [weeklyGoal, setWeeklyGoal] = useState(5);
+  const [streak, setStreak] = useState(0);
+
   return (
     <Router>
       <CssBaseline />
@@ -21,10 +28,34 @@ function App() {
           <Container>
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/dashboard" element={<Dashboard />} />
+              <Route
+                path="/dashboard"
+                element={
+                  <Dashboard
+                    nextPeriodDate={nextPeriodDate}
+                    currentPhase={currentPhase}
+                    daysRemaining={daysRemaining}
+                    workoutsThisWeek={workoutsThisWeek}
+                    weeklyGoal={weeklyGoal}
+                    streak={streak}
+                  />
+                }
+              />
               <Route path="/about" element={<About />} />
               <Route path="/workout-suggestions" element={<WorkoutSuggestions />} />
-              <Route path="/cycle-tracker" element={<CycleTracker />} />
+              <Route
+                path="/cycle-tracker"
+                element={
+                  <CycleTracker
+                    setNextPeriodDate={setNextPeriodDate}
+                    setCurrentPhase={setCurrentPhase}
+                    setDaysRemaining={setDaysRemaining}
+                    setWorkoutsThisWeek={setWorkoutsThisWeek}
+                    setWeeklyGoal={setWeeklyGoal}
+                    setStreak={setStreak}
+                  />
+                }
+              />
             </Routes>
           </Container>
         </main>

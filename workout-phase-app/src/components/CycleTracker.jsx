@@ -37,17 +37,23 @@ const phaseInfo = {
   },
 };
 
-function CycleTracker() {
+function CycleTracker({
+  setNextPeriodDate,
+  setCurrentPhase,
+  setDaysRemaining,
+  setWorkoutsThisWeek,
+  setWeeklyGoal,
+  setStreak,
+}) {
   const [periodStart, setPeriodStart] = useState("");
   const [showCalendar, setShowCalendar] = useState(false);
   const [cycleLength, setCycleLength] = useState(28);
   const [selectedDate, setSelectedDate] = useState(null);
   const [predictedCycles, setPredictedCycles] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
-  const [currentPhase, setCurrentPhase] = useState(null);
-  const [pendingEditDate, setPendingEditDate] = useState(null); // 👈 for edit button
+  const [currentPhaseState, setCurrentPhaseState] = useState(null);
+  const [pendingEditDate, setPendingEditDate] = useState(null);
 
-  // 🔹 Load saved data from localStorage on mount
   useEffect(() => {
     const storedDate = localStorage.getItem("periodStart");
     const storedCycleLength = localStorage.getItem("cycleLength");
@@ -66,12 +72,16 @@ function CycleTracker() {
         cycles.push(nextCycle);
       }
       setPredictedCycles(cycles);
+
+      // 🔹 Update parent props
+      setNextPeriodDate(cycles[1]?.toDateString());
+      setDaysRemaining(Math.floor((cycles[0] - new Date()) / (1000 * 60 * 60 * 24)));
     }
 
     if (storedCycleLength) {
       setCycleLength(Number(storedCycleLength));
     }
-  }, []);
+  }, [setNextPeriodDate, setDaysRemaining]);
 
   const handleSubmit = () => {
     if (periodStart) {
@@ -79,7 +89,6 @@ function CycleTracker() {
       const startDate = new Date(periodStart);
       setSelectedDate(startDate);
 
-      // predict next 3 cycles
       let cycles = [];
       for (let i = 0; i < 3; i++) {
         const nextCycle = new Date(startDate);
@@ -88,25 +97,25 @@ function CycleTracker() {
       }
       setPredictedCycles(cycles);
 
-      // 🔹 Save to localStorage
       localStorage.setItem("periodStart", periodStart);
       localStorage.setItem("cycleLength", cycleLength.toString());
+
+      // 🔹 Update parent props
+      setNextPeriodDate(cycles[1]?.toDateString());
+      setDaysRemaining(Math.floor((cycles[0] - new Date()) / (1000 * 60 * 60 * 24)));
     }
   };
 
-  // When clicking a date, show "Edit" option instead of instant update
   const handleDateClick = (date) => {
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);
 
-    // Restrict: cannot select future dates after tomorrow
     if (date > tomorrow) return;
 
-    setPendingEditDate(date); // 👈 show button after click
+    setPendingEditDate(date);
   };
 
-  // Confirm edit
   const confirmEditDate = () => {
     if (!pendingEditDate) return;
 
@@ -114,7 +123,6 @@ function CycleTracker() {
     setPeriodStart(newDate);
     setSelectedDate(pendingEditDate);
 
-    // Recalculate cycles based on new selection
     let cycles = [];
     for (let i = 0; i < 3; i++) {
       const nextCycle = new Date(pendingEditDate);
@@ -123,19 +131,20 @@ function CycleTracker() {
     }
     setPredictedCycles(cycles);
 
-    // 🔹 Update localStorage
     localStorage.setItem("periodStart", newDate);
     localStorage.setItem("cycleLength", cycleLength.toString());
 
-    setPendingEditDate(null); // reset after confirmation
+    // 🔹 Update parent props
+    setNextPeriodDate(cycles[1]?.toDateString());
+    setDaysRemaining(Math.floor((cycles[0] - new Date()) / (1000 * 60 * 60 * 24)));
+
+    setPendingEditDate(null);
   };
 
-  // Cancel edit
   const cancelEditDate = () => {
     setPendingEditDate(null);
   };
 
-  // Highlight phases on calendar
   const tileClassName = ({ date }) => {
     if (!showCalendar || predictedCycles.length === 0) return "default-day";
 
@@ -156,15 +165,15 @@ function CycleTracker() {
     return "default-day";
   };
 
-  // Legend info popover
   const handleLegendClick = (phase, event) => {
-    setCurrentPhase(phase);
+    setCurrentPhaseState(phase);
     setAnchorEl(event.currentTarget);
+    setCurrentPhase(phase); // 🔹 update parent
   };
 
   const handleClose = () => {
     setAnchorEl(null);
-    setCurrentPhase(null);
+    setCurrentPhaseState(null);
   };
 
   const open = Boolean(anchorEl);
@@ -210,10 +219,9 @@ function CycleTracker() {
               tileClassName={tileClassName}
               prev2Label={null}
               next2Label={null}
-              onClickDay={handleDateClick} // ✅ click date shows edit option
+              onClickDay={handleDateClick}
             />
 
-            {/* 👇 Show Edit option after clicking a date */}
             {pendingEditDate && (
               <div style={{ marginTop: "12px", textAlign: "center" }}>
                 <Typography variant="body2" gutterBottom>
@@ -276,13 +284,13 @@ function CycleTracker() {
               anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
             >
               <CardContent style={{ maxWidth: 300 }}>
-                {currentPhase && (
+                {currentPhaseState && (
                   <>
                     <Typography variant="subtitle1">
-                      {phaseInfo[currentPhase].title}
+                      {phaseInfo[currentPhaseState].title}
                     </Typography>
                     <Typography variant="body2">
-                      {phaseInfo[currentPhase].description}
+                      {phaseInfo[currentPhaseState].description}
                     </Typography>
                   </>
                 )}
@@ -296,3 +304,4 @@ function CycleTracker() {
 }
 
 export default CycleTracker;
+
