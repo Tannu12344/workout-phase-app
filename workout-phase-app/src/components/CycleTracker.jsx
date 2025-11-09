@@ -146,21 +146,24 @@ function CycleTracker({
   };
 
   const tileClassName = ({ date }) => {
-    if (!showCalendar || predictedCycles.length === 0) return "default-day";
+    if (!showCalendar) return "default-day";
 
-    for (let start of predictedCycles) {
-      const diff = Math.floor((date - start) / (1000 * 60 * 60 * 24));
-
-      if (diff >= 0 && diff <= 4) return "menstrual-day";
-      if (diff >= 5 && diff <= 12) return "follicular-day";
-      if (diff >= 13 && diff <= 16) return "ovulation-day";
-      if (diff >= 17 && diff <= cycleLength - 1) return "luteal-day";
-    }
+    // highlight today first (so it shows even if predictedCycles is empty)
+    if (date.toDateString() === new Date().toDateString()) return "today";
 
     if (selectedDate && date.toDateString() === selectedDate.toDateString())
       return "selected-period-day";
 
-    if (date.toDateString() === new Date().toDateString()) return "today";
+    if (predictedCycles.length > 0) {
+      for (let start of predictedCycles) {
+        const diff = Math.floor((date - start) / (1000 * 60 * 60 * 24));
+
+        if (diff >= 0 && diff <= 4) return "menstrual-day";
+        if (diff >= 5 && diff <= 12) return "follicular-day";
+        if (diff >= 13 && diff <= 16) return "ovulation-day";
+        if (diff >= 17 && diff <= cycleLength - 1) return "luteal-day";
+      }
+    }
 
     return "default-day";
   };

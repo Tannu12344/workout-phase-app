@@ -24,9 +24,6 @@ function Header() {
           <Button component={Link} to="/dashboard">
             Dashboard
           </Button>
-          <Button component={Link} to="/calendar">
-            Calendar
-          </Button>
           <Button component={Link} to="/workout-suggestions">
             Workout Suggestions
           </Button>
