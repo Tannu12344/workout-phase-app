@@ -1,0 +1,165 @@
+.home-container {
+  font-family: "Poppins", sans-serif;
+  color: #444;
+  background: #fffafc;
+  min-height: 100vh;
+  padding-top: 80px; /* offset for header */
+}
+
+/* 🌷 Hero Section */
+.hero {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(135deg, #ffe4ec, #fff8f9);
+  border-bottom: 1px solid #f7c6d1;
+  animation: fadeIn 1.2s ease-in;
+}
+
+.hero h1 {
+  font-size: 2.4rem;
+  color: #ff6f91;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 2rem;
+}
+
+.hero button {
+  background: linear-gradient(90deg, #ff6f91, #ffb6b9);
+  color: white;
+  border-radius: 30px;
+  padding: 10px 24px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.hero button:hover {
+  background: linear-gradient(90deg, #ff5f87, #ff9ea1);
+  transform: scale(1.05);
+}
+
+/* 🌿 Overview Cards */
+.overview {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  margin: 3rem 1rem;
+}
+
+.overview .MuiCard-root {
+  flex: 1 1 200px;
+  max-width: 250px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(255, 182, 185, 0.25);
+  padding: 1rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.overview .MuiCard-root:hover {
+  transform: translateY(-6px);
+}
+
+.overview h6 {
+  color: #ff6f91;
+  margin-bottom: 0.5rem;
+}
+
+/* ✨ Features Section */
+.features {
+  text-align: center;
+  padding: 2rem;
+  background: #fff2f6;
+  border-radius: 30px;
+  margin: 0 1rem;
+  box-shadow: 0 4px 12px rgba(255, 182, 185, 0.25);
+}
+
+.features h2 {
+  color: #ff6f91;
+  margin-bottom: 1.2rem;
+}
+
+.features ul {
+  list-style: none;
+  padding: 0;
+  font-size: 1rem;
+  color: #555;
+}
+
+.features li {
+  margin: 0.6rem 0;
+  transition: transform 0.2s ease;
+}
+
+.features li:hover {
+  transform: scale(1.05);
+}
+
+/* 🌙 Quote Section */
+.quote {
+  text-align: center;
+  margin: 3rem 2rem;
+  font-style: italic;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* ⚡ CTA Buttons */
+.cta-buttons {
+  text-align: center;
+  margin: 3rem 0 5rem 0;
+}
+
+.cta-buttons button {
+  margin: 0.6rem;
+  border-radius: 30px;
+  padding: 10px 20px;
+  text-transform: none;
+  transition: all 0.3s ease;
+}
+
+.cta-buttons .MuiButton-containedSecondary {
+  background-color: #ffb6b9;
+  color: #fff;
+}
+
+.cta-buttons .MuiButton-containedSecondary:hover {
+  background-color: #ff9fa2;
+}
+
+.cta-buttons .MuiButton-containedSuccess {
+  background-color: #9bd4cb;
+  color: #fff;
+}
+
+.cta-buttons .MuiButton-containedSuccess:hover {
+  background-color: #7fc6b9;
+}
+
+.cta-buttons .MuiButton-outlinedPrimary {
+  border-color: #ff6f91;
+  color: #ff6f91;
+}
+
+.cta-buttons .MuiButton-outlinedPrimary:hover {
+  background-color: rgba(255, 111, 145, 0.1);
+}
+
+/* 🌸 Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
