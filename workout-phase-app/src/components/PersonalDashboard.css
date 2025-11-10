@@ -1,46 +1,102 @@
+.dashboard-container {
+  font-family: "Poppins", sans-serif;
+  background: #fffafc;
+  min-height: 100vh;
+  padding: 6rem 1rem 3rem;
+  color: #444;
+}
+
+/* 🌸 Dashboard Card */
 .dashboard-card {
-  max-width: 600px;
-  margin: 20px auto;
-  border-radius: 16px;
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  border-radius: 20px;
+  box-shadow: 0 4px 15px rgba(255, 182, 185, 0.25);
   background-color: #ffffff;
-  padding: 20px;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
 }
 
 .dashboard-title {
-  font-weight: bold;
-  text-align: center;
-  color: #333333;
+  color: #ff6f91;
+  font-weight: 600;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
 }
 
+/* 🌷 Sections inside Dashboard */
 .dashboard-section {
-  margin-top: 20px;
+  background: #fff2f6;
+  border-radius: 20px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+  box-shadow: 0 4px 12px rgba(255, 182, 185, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.dashboard-section:hover {
+  transform: translateY(-5px);
 }
 
 .dashboard-section h3 {
-  font-size: 1rem;
-  margin-bottom: 6px;
-  color: #444444;
+  font-size: 1.1rem;
+  color: #ff6f91;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
 }
 
 .dashboard-section p {
-  font-size: 0.9rem;
-  color: #666666;
+  font-size: 1rem;
+  color: #555;
 }
 
+/* ⚡ Quick Actions */
 .quick-actions {
   display: flex;
-  justify-content: space-around;
-  margin-top: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .quick-actions button {
-  min-width: 120px;
+  min-width: 140px;
   font-weight: 500;
-  border-radius: 10px;
-  transition: 0.3s ease-in-out;
+  border-radius: 30px;
+  padding: 10px 18px;
+  background: linear-gradient(90deg, #ff6f91, #ffb6b9);
+  color: white;
+  border: none;
+  transition: all 0.3s ease;
 }
 
 .quick-actions button:hover {
+  background: linear-gradient(90deg, #ff5f87, #ff9ea1);
   transform: scale(1.05);
+}
+
+/* 🌙 Quote or Footer Text (optional) */
+.dashboard-quote {
+  text-align: center;
+  margin-top: 2.5rem;
+  color: #666;
+  font-style: italic;
+  font-size: 1rem;
+}
+
+/* ✨ Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

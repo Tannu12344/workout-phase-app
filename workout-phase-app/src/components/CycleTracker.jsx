@@ -184,9 +184,6 @@ function CycleTracker({
   return (
     <Card className="cycle-tracker-card">
       <CardContent>
-        <Typography variant="h6" gutterBottom>
-          Cycle Tracker
-        </Typography>
         {!showCalendar ? (
           <>
             <Typography variant="body2" gutterBottom>

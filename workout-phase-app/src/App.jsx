@@ -27,7 +27,17 @@ function App() {
         <main className="app-content">
           <Container>
             <Routes>
-              <Route path="/" element={<Home />} />
+             <Route
+  path="/"
+  element={
+    <Home
+      nextPeriodDate={nextPeriodDate}
+      currentPhase={currentPhase}
+      streak={streak}
+    />
+  }
+/>
+
               <Route
                 path="/dashboard"
                 element={

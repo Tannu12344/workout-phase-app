@@ -1,123 +1,114 @@
-/* Center the calendar and increase its size */
-.react-calendar {
-  width: 80% !important;
-  max-width: 500px;
-  margin: 20px auto;
-  font-size: 1.1rem;
-  border: solid 1px #eee;
-  background: #fff; /* ✅ solid white background */
-  border-radius: 12px;
+/* 🌸 General Card */
+.cycle-tracker-card {
+  border-radius: 20px !important;
+  box-shadow: 0 4px 15px rgba(255, 182, 185, 0.25) !important;
+  background-color: #ffffff !important;
+  padding: 2rem;
+  font-family: "Poppins", sans-serif;
+  transition: transform 0.3s ease;
 }
-.react-calendar__navigation button {
-  color: #1976d2;
+
+.cycle-tracker-card:hover {
+  transform: translateY(-5px);
+}
+
+/* 🩷 Title */
+.cycle-tracker-card h6 {
+  color: #ff6f91;
   font-weight: 600;
-  font-size: 1.1rem;
-  border-radius: 8px;
-  padding: 6px 12px;
-  transition: background 0.2s ease;
+  font-size: 1.4rem;
+}
+
+/* 📅 Calendar Styling */
+.react-calendar {
+  width: 100%;
+  max-width: 500px;
+  background: #fffafc;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(255, 182, 185, 0.2);
+  padding: 1rem;
+  margin: 1.5rem auto;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+.react-calendar__navigation button {
+  color: #ff6f91;
+  font-weight: 600;
+  border-radius: 12px;
+  background: transparent;
+  transition: all 0.3s ease;
 }
 
 .react-calendar__navigation button:hover {
-  background: #e3f2fd;
+  background: rgba(255, 182, 185, 0.2);
+  color: #ff4f75;
 }
 
-.react-calendar__navigation button:disabled {
-  background: none;
-  color: #bbb;
+/* 📆 Calendar Days */
+.react-calendar__tile {
+  padding: 0.7rem 0.4rem !important;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+  color: #555;
 }
 
-.cycle-tracker-card {
-  max-width: 500px;
-  margin: 20px auto;
-  border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  background: #fff; /* ✅ solid white card */
-  z-index: 2;
-}
-/* Calendar tiles */
-.default-day {
-  background: #f8f8f8 !important;
-  color: #555 !important;
-  border-radius: 50%;
-  transition: transform 0.2s;
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #ccc;
 }
 
-.default-day:hover {
-  transform: scale(1.1);
-  cursor: pointer;
+/* 🩷 Hover Effect */
+.react-calendar__tile:hover {
+  background: #ffe4eb;
+  color: #ff4f75;
 }
 
-.today {
-  background: #ff6f91 !important; /* pink */
-  color: white !important;
-  border-radius: 50% !important;
-  font-weight: bold;
-  border: 2px solid #ff3366;
-}
-
+/* 🌷 Period Phases */
 .menstrual-day {
-  background: #f28b82 !important;
-  color: white !important;
-  border-radius: 50%;
+  background: rgba(255, 111, 145, 0.3);
+  color: #ff4f75 !important;
+  border-radius: 10px;
 }
 
 .follicular-day {
-  background: #aecbfa !important;
-  color: white !important;
-  border-radius: 50%;
+  background: rgba(255, 182, 185, 0.25);
+  color: #ff6f91 !important;
+  border-radius: 10px;
 }
 
 .ovulation-day {
-  background: #fdd663 !important;
-  color: black !important;
-  border-radius: 50%;
+  background: rgba(255, 182, 210, 0.35);
+  color: #ff3f65 !important;
+  border-radius: 10px;
 }
 
 .luteal-day {
-  background: #81c995 !important;
-  color: white !important;
-  border-radius: 50%;
+  background: rgba(255, 182, 185, 0.15);
+  color: #d85f87 !important;
+  border-radius: 10px;
 }
 
+/* 🌸 Highlight Days */
 .selected-period-day {
-  background: #ff3366 !important;
+  background: #ff6f91 !important;
   color: white !important;
-  border-radius: 50%;
-  font-weight: bold;
+  border-radius: 10px;
+}
+
+.today {
+  background: #fff0f5 !important;
   border: 2px solid #ff6f91;
-}
-
-/* Month navigation buttons */
-.react-calendar__navigation button {
-  color: #ff6f91;
-  font-weight: bold;
-  font-size: 1.1rem;
-  background: transparent;
-  border: none;
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: background 0.2s;
-}
-
-.react-calendar__navigation button:hover {
-  background: rgba(255, 111, 145, 0.15);
-}
-
-/* Weekday headers */
-.react-calendar__month-view__weekdays {
-  text-align: center;
-  color: #ff6f91;
+  border-radius: 10px;
   font-weight: 600;
-  font-size: 0.95rem;
 }
 
-/* Legend styling */
+/* 🩰 Legend Styling */
 .legend-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 0.8rem 1.5rem;
+  margin-top: 1.5rem;
   justify-content: center;
 }
 
@@ -125,50 +116,64 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  cursor: pointer;
-  padding: 4px 6px;
-  border-radius: 8px;
-  transition: background 0.2s;
+  font-size: 0.9rem;
+  color: #555;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
-.legend-item:hover {
-  background: rgba(255, 111, 145, 0.1);
-}
-
-/* Legend colors */
 .legend-color {
   width: 16px;
   height: 16px;
-  border-radius: 4px;
-  display: inline-block;
+  border-radius: 50%;
 }
 
 .legend-color.menstrual {
-  background: #f28b82;
+  background: rgba(255, 111, 145, 0.8);
 }
 
 .legend-color.follicular {
-  background: #aecbfa;
+  background: rgba(255, 182, 185, 0.8);
 }
 
 .legend-color.ovulation {
-  background: #fdd663;
+  background: rgba(255, 182, 210, 0.8);
 }
 
 .legend-color.luteal {
-  background: #81c995;
+  background: rgba(255, 170, 190, 0.8);
 }
 
 .legend-color.selected-period-day {
-  background: #ff3366;
-}
-
-.legend-color.today {
   background: #ff6f91;
 }
 
-/* Popover content */
-.MuiPopover-paper {
-  border-radius: 12px !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+.legend-color.today {
+  background: #fff0f5;
+  border: 2px solid #ff6f91;
+}
+
+/* 🩷 Buttons */
+button.MuiButton-containedPrimary {
+  background: linear-gradient(90deg, #ff6f91, #ffb6b9) !important;
+  border-radius: 30px !important;
+  text-transform: none !important;
+  font-weight: 500 !important;
+  transition: all 0.3s ease !important;
+}
+
+button.MuiButton-containedPrimary:hover {
+  background: linear-gradient(90deg, #ff5f87, #ff9ea1) !important;
+  transform: scale(1.05);
+}
+
+/* ✨ Fade Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
