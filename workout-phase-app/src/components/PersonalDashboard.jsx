@@ -62,9 +62,6 @@ function PersonalDashboard({
           <Button variant="contained" color="primary">
             Add Workout
           </Button>
-          <Button variant="contained" color="secondary">
-            Log Symptoms
-          </Button>
           <Button
             variant="contained"
             color="success"
